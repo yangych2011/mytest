@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.puck.cofounder.mapper.system.UserMapper">
+
+	<sql id="columns">
+		ID,
+		NAME,
+		AGE,
+		GENDER
+	</sql>
+
+	<!-- 根据id查询user -->
+	<select id="selectUserById" parameterType="String" resultType="com.puck.cofounder.domain.User">
+		select
+		<include refid="columns" />
+		from user
+		<where>
+			id=#{id,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+	<!-- 查询所有的user -->
+	<select id="selectAllUsers" resultType="com.puck.cofounder.domain.User">
+		select
+		<include refid="columns" />
+		from user
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="selectAllUsersDoPagination" resultType="com.puck.cofounder.domain.User">
+		select
+		<include refid="columns" />
+		from user
+	</select>
+	
+	<!-- 带条件分页查询 -->
+	<select id="selectUsersByGenderDoPagination" resultType="com.puck.cofounder.domain.User">
+		select
+		<include refid="columns" />
+		from user
+		<where>
+			gender=#{gender}
+		</where>
+	</select>
+	
+	<!-- 插入user -->
+	<insert id="insertUser" parameterType="com.puck.cofounder.domain.User">
+		insert into user values(
+		#{id},
+		#{name},
+		#{age},
+		#{gender}
+		)
+	</insert>
+	
+	<!-- 更新user -->
+	<update id="updateUserById" parameterType="com.puck.cofounder.domain.User">
+		update user
+		set
+		name=#{name},
+		age=#{age},
+		gender=#{gender}
+		<where>
+			id=#{id}
+		</where>
+	</update>
+
+</mapper>

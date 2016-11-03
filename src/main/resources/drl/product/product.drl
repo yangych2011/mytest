@@ -1,0 +1,32 @@
+package com.puck.myrules.product
+
+import com.puck.intelrecom.domain.BsProduct;
+import java.util.Set;
+import java.util.Map;
+import java.math.BigDecimal; 
+
+global Set types;
+global Map params;
+
+
+rule product4c_type
+	salience 100
+	lock-on-active true
+	when
+		$bp : BsProduct(guaranteeType memberOf types)
+	then
+		Map<String,Integer> m = (Map<String,Integer>)params.get("rule_weight");
+		$bp.setIntegral($bp.getIntegral()+m.get("guarantee_type"));
+		System.out.println($bp.getIntegral());
+	end
+	
+rule product4c_amount
+	salience 90
+	lock-on-active true
+	when
+		$bp : BsProduct(productAmount>=params.get("amount_min"),productAmount<=params.get("amount_max"));
+	then
+		Map<String,Integer> m = (Map<String,Integer>)params.get("rule_weight");
+		System.out.println($bp.getProductAmount());
+		$bp.setIntegral($bp.getIntegral()+m.get("amount"));
+	end

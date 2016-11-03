@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="F:\mvn_repository\mysql\mysql-connector-java\5.1.13\mysql-connector-java-5.1.13.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/mydb?useUnicode=true&amp;characterEncoding=UTF-8&amp;" 
+                        userId="root"
+                        password=""/>
+
+        <javaModelGenerator targetPackage="com.puck.intelrecom.domain"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper.intelrecom"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.puck.intelrecom.mapper"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="ru_ref_rules" 
+        	   domainObjectName="RuRefRules" 
+        	   enableCountByExample="false" 
+        	   enableUpdateByExample="false" 
+        	   enableDeleteByExample="false" 
+        	   enableSelectByExample="false" 
+        	   selectByExampleQueryId="false"></table>  
+        <table tableName="ru_dilatation_type" 
+        	   domainObjectName="RuDilatationType" 
+        	   enableCountByExample="false" 
+        	   enableUpdateByExample="false" 
+        	   enableDeleteByExample="false" 
+        	   enableSelectByExample="false" 
+        	   selectByExampleQueryId="false"></table>  
+        <table tableName="ru_dilatation_enmu" 
+        	   domainObjectName="RuDilatationEnmu" 
+        	   enableCountByExample="false" 
+        	   enableUpdateByExample="false" 
+        	   enableDeleteByExample="false" 
+        	   enableSelectByExample="false" 
+        	   selectByExampleQueryId="false"></table>  
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,32 @@
+package com.puck.myrules.asset
+
+import com.puck.intelrecom.domain.BsAsset;
+import java.lang.String;
+import java.util.Map;
+import java.math.BigDecimal; 
+
+global String type;
+global Map params;
+
+
+rule asset_type
+	salience 100
+	lock-on-active true
+	when
+		$ba : BsAsset(assetType == type)
+	then
+		Map<String,Integer> m = (Map<String,Integer>)params.get("rule_weight");
+		$ba.setIntegral($ba.getIntegral()+m.get("asset_type"));
+		System.out.println($ba.getIntegral());
+	end
+	
+rule asset_amount
+	salience 90
+	lock-on-active true
+	when
+		$ba : BsAsset(assetAmount>=params.get("asset_amount_min"),assetAmount<=params.get("asset_amount_max"));
+	then
+		Map<String,Integer> m = (Map<String,Integer>)params.get("rule_weight");
+		System.out.println($ba.getAssetAmount());
+		$ba.setIntegral($ba.getIntegral()+m.get("asset_amount"));
+	end	
