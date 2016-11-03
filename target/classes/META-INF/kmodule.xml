@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
-    <kbase name="productrules" packages="drl.product">
-        <ksession name="product-rules"/>
-    </kbase>
-    <kbase name="assetrules" packages="drl.asset">
-        <ksession name="asset-rules"/>
-    </kbase>
-</kmodule>
